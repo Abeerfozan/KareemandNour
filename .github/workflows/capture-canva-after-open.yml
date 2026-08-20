@@ -36,13 +36,20 @@ jobs:
           (async () => {
             const browser = await chromium.launch({ headless: true });
             const page = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1 });
-            const url = 'https://amjadko.my.canva.site/laithandanwar';
-            await page.goto(url, { waitUntil: 'networkidle', timeout: 120000 });
-            await page.waitForTimeout(4000);
-            const opener = page.getByText('اضغط لــفتح الـدعوة', { exact: false }).first();
-            if (await opener.count()) await opener.click({ force: true });
-            else await page.locator('a[href="#page-0"]').first().click({ force: true }).catch(()=>{});
-            await page.waitForTimeout(8000);
+            const base = 'https://amjadko.my.canva.site/laithandanwar';
+            await page.goto(base, { waitUntil: 'networkidle', timeout: 120000 });
+            await page.waitForTimeout(3500);
+            const anchor = page.locator('a[href="#page-0"]').first();
+            if (await anchor.count()) {
+              await anchor.click({ force: true }).catch(()=>{});
+              await page.waitForTimeout(3000);
+            }
+            if (!page.url().includes('#page-0')) {
+              await page.goto(base + '/#page-0', { waitUntil: 'networkidle', timeout: 120000 });
+              await page.waitForTimeout(5000);
+            }
+            await page.evaluate(() => { location.hash = '#page-0'; });
+            await page.waitForTimeout(5000);
             await page.screenshot({ path: 'reference/after-mobile.png', fullPage: true });
             fs.writeFileSync('reference/after-page.html', await page.content(), 'utf8');
             fs.writeFileSync('reference/after-body.txt', await page.locator('body').innerText().catch(() => ''), 'utf8');
@@ -65,7 +72,7 @@ jobs:
                 .filter((v,i,a)=>a.findIndex(x=>x.text===v.text && x.x===v.x && x.y===v.y)===i);
               const media = [...document.querySelectorAll('img,video')].filter(visible).map(el=>{const r=el.getBoundingClientRect();return {tag:el.tagName,src:el.currentSrc||el.src,x:Math.round(r.x),y:Math.round(r.y+scrollY),w:Math.round(r.width),h:Math.round(r.height)};});
               const links = [...document.querySelectorAll('a')].map(a=>({text:clean(a.innerText),href:a.href})).filter(x=>x.href);
-              return {title:document.title,url:location.href,scrollHeight:document.documentElement.scrollHeight,texts,media,links};
+              return {title:document.title,url:location.href,hash:location.hash,scrollHeight:document.documentElement.scrollHeight,texts,media,links};
             });
             fs.writeFileSync('reference/after-elements.json', JSON.stringify(data,null,2));
             await browser.close();
@@ -76,5 +83,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -- reference/after-mobile.png reference/after-page.html reference/after-body.txt reference/after-elements.json
-          git commit -m "chore: capture opened Canva invitation" || exit 0
+          git commit -m "chore: recapture opened Canva invitation" || exit 0
           git push origin HEAD:laith-anwar-rebuild

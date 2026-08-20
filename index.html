@@ -56,7 +56,7 @@
   /* ===== FULL SCREEN ENVELOPE ===== */
   #envelope-cover{
     position:fixed; inset:0; z-index:999; overflow:hidden;
-    background:linear-gradient(145deg, #ead8cb 0%, #f4e7de 44%, #e8d3c4 100%); cursor:pointer;
+    background:transparent; cursor:pointer;
     perspective:1400px; perspective-origin:50% 50%;
   }
   #envelope-cover.opened{ visibility:hidden; pointer-events:none; }
@@ -540,21 +540,29 @@ function openEnvelope(){
     invite.classList.add("shown");
 
     document
-        .getElementById("envelope-cover")
-        .classList.add("opened");
-
-    document.body.style.overflow = "auto";
-
-    window.scrollTo({
-        top:0,
-        behavior:"auto"
-    });
+        .querySelector(".envelope-full")
+        .classList.add("opening");
 
     setTimeout(()=>{
+
         document
-            .getElementById("hero")
-            .classList.add("play-names");
-    },1000);
+            .getElementById("envelope-cover")
+            .classList.add("opened");
+
+        document.body.style.overflow = "auto";
+
+        window.scrollTo({
+            top:0,
+            behavior:"auto"
+        });
+
+        setTimeout(()=>{
+            document
+                .getElementById("hero")
+                .classList.add("play-names");
+        },1000);
+
+    },1700);
 
 }
 

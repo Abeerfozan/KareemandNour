@@ -1,0 +1,77 @@
+name: Capture Canva After Open
+
+on:
+  push:
+    branches:
+      - laith-anwar-rebuild
+
+permissions:
+  contents: write
+
+jobs:
+  capture:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: laith-anwar-rebuild
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install Playwright
+        run: |
+          npm init -y
+          npm install playwright
+          npx playwright install --with-deps chromium
+      - name: Capture opened invitation
+        run: |
+          mkdir -p reference
+          node <<'NODE'
+          const { chromium } = require('playwright');
+          const fs = require('fs');
+          (async () => {
+            const browser = await chromium.launch({ headless: true });
+            const page = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1 });
+            const url = 'https://amjadko.my.canva.site/laithandanwar';
+            await page.goto(url, { waitUntil: 'networkidle', timeout: 120000 });
+            await page.waitForTimeout(4000);
+            const opener = page.getByText('اضغط لــفتح الـدعوة', { exact: false }).first();
+            if (await opener.count()) await opener.click({ force: true });
+            else await page.locator('a[href="#page-0"]').first().click({ force: true }).catch(()=>{});
+            await page.waitForTimeout(8000);
+            await page.screenshot({ path: 'reference/after-mobile.png', fullPage: true });
+            fs.writeFileSync('reference/after-page.html', await page.content(), 'utf8');
+            fs.writeFileSync('reference/after-body.txt', await page.locator('body').innerText().catch(() => ''), 'utf8');
+            const data = await page.evaluate(() => {
+              const clean = s => (s || '').replace(/\s+/g,' ').trim();
+              const visible = el => {
+                const r = el.getBoundingClientRect();
+                const cs = getComputedStyle(el);
+                return r.width > 1 && r.height > 1 && cs.display !== 'none' && cs.visibility !== 'hidden' && Number(cs.opacity || 1) > 0;
+              };
+              const texts = [...document.querySelectorAll('p,span,h1,h2,h3,h4,h5,h6,div,a,button')]
+                .filter(visible)
+                .map(el => {
+                  const t = clean(el.innerText);
+                  if (!t || t.length > 250) return null;
+                  const r = el.getBoundingClientRect();
+                  const cs = getComputedStyle(el);
+                  return {tag:el.tagName,text:t,x:Math.round(r.x),y:Math.round(r.y+scrollY),w:Math.round(r.width),h:Math.round(r.height),font:cs.fontFamily,size:cs.fontSize,weight:cs.fontWeight,color:cs.color,bg:cs.backgroundColor,align:cs.textAlign};
+                }).filter(Boolean)
+                .filter((v,i,a)=>a.findIndex(x=>x.text===v.text && x.x===v.x && x.y===v.y)===i);
+              const media = [...document.querySelectorAll('img,video')].filter(visible).map(el=>{const r=el.getBoundingClientRect();return {tag:el.tagName,src:el.currentSrc||el.src,x:Math.round(r.x),y:Math.round(r.y+scrollY),w:Math.round(r.width),h:Math.round(r.height)};});
+              const links = [...document.querySelectorAll('a')].map(a=>({text:clean(a.innerText),href:a.href})).filter(x=>x.href);
+              return {title:document.title,url:location.href,scrollHeight:document.documentElement.scrollHeight,texts,media,links};
+            });
+            fs.writeFileSync('reference/after-elements.json', JSON.stringify(data,null,2));
+            await browser.close();
+          })();
+          NODE
+      - name: Commit capture
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- reference/after-mobile.png reference/after-page.html reference/after-body.txt reference/after-elements.json
+          git commit -m "chore: capture opened Canva invitation" || exit 0
+          git push origin HEAD:laith-anwar-rebuild

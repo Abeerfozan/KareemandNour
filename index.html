@@ -175,7 +175,7 @@
     box-shadow:0 22px 45px rgba(150,110,70,.22);
   }
 
-  /* Sequential Kareem → and → Nour lockup. Wrappers crop the original transparent canvases visually. */
+  /* Sequential Kareem → and → Nour lockup. */
   .name-lockup{
     position:absolute;
     left:25%;
@@ -189,11 +189,7 @@
     position:absolute;
     overflow:hidden;
     opacity:0;
-    clip-path:inset(0 100% 0 0);
-    transform:scale(.985);
-    transform-origin:center;
-    will-change:opacity,clip-path,filter,transform;
-    filter:blur(5px) drop-shadow(0 4px 8px rgba(92,76,86,.08));
+    will-change:opacity;
   }
   .name-piece img{
     position:absolute;
@@ -212,30 +208,13 @@
   .name-nour{ left:31.24%; top:48.39%; width:66.67%; aspect-ratio:964 / 830; }
   .name-nour img{ width:169.92%; left:-35.68%; top:-74.10%; }
 
-  @keyframes namePieceReveal{
-    0%{
-      opacity:0;
-      clip-path:inset(0 100% 0 0);
-      filter:blur(5px) drop-shadow(0 4px 8px rgba(92,76,86,.06));
-      transform:scale(.985);
-    }
-    18%{ opacity:1; }
-    72%{
-      opacity:1;
-      clip-path:inset(0 0 0 0);
-      filter:blur(.5px) drop-shadow(0 4px 8px rgba(92,76,86,.08));
-      transform:scale(1);
-    }
-    100%{
-      opacity:1;
-      clip-path:inset(0 0 0 0);
-      filter:blur(0) drop-shadow(0 4px 8px rgba(92,76,86,.08));
-      transform:scale(1);
-    }
+  @keyframes namePieceFade{
+    from{ opacity:0; }
+    to{ opacity:1; }
   }
-  .hero.play-names .name-kareem{ animation:namePieceReveal .95s cubic-bezier(.22,.8,.22,1) 0s forwards; }
-  .hero.play-names .name-and{ animation:namePieceReveal .85s cubic-bezier(.22,.8,.22,1) .78s forwards; }
-  .hero.play-names .name-nour{ animation:namePieceReveal .95s cubic-bezier(.22,.8,.22,1) 1.52s forwards; }
+  .hero.play-names .name-kareem{ animation:namePieceFade .9s ease 0s forwards; }
+  .hero.play-names .name-and{ animation:namePieceFade .8s ease .65s forwards; }
+  .hero.play-names .name-nour{ animation:namePieceFade .9s ease 1.30s forwards; }
 
   .section-title{ font-family:'Lifta','Amiri',serif; font-size:38px; color:var(--ink); margin:0 0 8px; }
   .divider{ width:60px; height:2px; margin:0 auto 30px; background:linear-gradient(90deg, transparent, var(--apricot), transparent); }
@@ -375,7 +354,7 @@
   @media (prefers-reduced-motion: reduce){
     .petal{ display:none; }
     .fade-in{ transition:none; opacity:1; transform:none; }
-    .hero.play-names .name-piece{ animation:none; opacity:1; clip-path:inset(0); transform:none; filter:none; }
+    .hero.play-names .name-piece{ animation:none; opacity:1; }
   }
 </style>
 </head>

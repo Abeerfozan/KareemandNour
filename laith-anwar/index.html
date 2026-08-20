@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f4efe5" />
+  <meta name="description" content="Laith & Anwar — Wedding Invitation" />
+  <title>Laith & Anwar — Wedding Invitation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa+Ink:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Kufi+Arabic:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="petals" id="petals" aria-hidden="true"></div>
+
+  <div class="opening-screen" id="openingScreen" role="dialog" aria-modal="true" aria-label="فتح الدعوة">
+    <div class="opening-ornament ornament-top" aria-hidden="true"></div>
+    <div class="opening-content">
+      <p class="eyebrow">YOU'RE INVITED</p>
+      <div class="monogram" aria-hidden="true"><span>L</span><i>&amp;</i><span>A</span></div>
+      <p class="opening-name">Laith <span>&amp;</span> Anwar</p>
+      <button class="open-button" id="openInvitation" type="button">
+        <span>افتح الدعوة</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+      <p class="tiny-note">اضغط لبدء التجربة</p>
+    </div>
+    <div class="opening-ornament ornament-bottom" aria-hidden="true"></div>
+  </div>
+
+  <main id="invitation" class="invitation" aria-hidden="true">
+    <section class="hero section-full" id="home">
+      <svg class="corner corner-a" viewBox="0 0 240 240" aria-hidden="true">
+        <path d="M18 223C55 155 85 113 145 77c23-14 47-31 62-58"/>
+        <path d="M52 170c11-8 27-10 41-6-8 11-25 18-41 6Zm55-52c9-11 25-17 39-15-5 14-20 26-39 15Zm52-46c6-12 19-23 33-25 0 15-10 31-33 25Z"/>
+        <circle cx="135" cy="88" r="5"/><circle cx="178" cy="53" r="4"/>
+      </svg>
+      <svg class="corner corner-b" viewBox="0 0 240 240" aria-hidden="true">
+        <path d="M18 223C55 155 85 113 145 77c23-14 47-31 62-58"/>
+        <path d="M52 170c11-8 27-10 41-6-8 11-25 18-41 6Zm55-52c9-11 25-17 39-15-5 14-20 26-39 15Zm52-46c6-12 19-23 33-25 0 15-10 31-33 25Z"/>
+        <circle cx="135" cy="88" r="5"/><circle cx="178" cy="53" r="4"/>
+      </svg>
+
+      <div class="hero-inner reveal">
+        <p class="hero-overline">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
+        <p class="hero-intro">بكل الحب، ندعوكم لمشاركتنا بداية فصلٍ جديد</p>
+        <div class="name-stack" aria-label="Laith and Anwar">
+          <h1>Laith</h1>
+          <div class="ampersand"><span>&amp;</span></div>
+          <h1>Anwar</h1>
+        </div>
+        <p class="hero-copy">Together with our families, we invite you to celebrate our wedding.</p>
+        <div class="scroll-cue" aria-hidden="true"><span></span><small>SCROLL</small></div>
+      </div>
+    </section>
+
+    <section class="quote-section section-pad">
+      <div class="thin-frame reveal">
+        <span class="frame-mark">❦</span>
+        <p class="verse">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</p>
+        <p class="verse-ref">سورة الروم — ٢١</p>
+      </div>
+    </section>
+
+    <section class="details section-pad" id="details">
+      <div class="section-heading reveal">
+        <p class="eyebrow">SAVE THE DATE</p>
+        <h2>موعدنا معكم</h2>
+        <div class="heading-line"><i></i><span>✦</span><i></i></div>
+      </div>
+
+      <div class="event-card reveal">
+        <div class="event-col">
+          <span class="event-label">اليوم</span>
+          <strong id="dayName">—</strong>
+        </div>
+        <div class="event-date">
+          <span id="monthName">—</span>
+          <b id="dayNumber">—</b>
+          <span id="yearNumber">—</span>
+        </div>
+        <div class="event-col">
+          <span class="event-label">الساعة</span>
+          <strong id="eventTime">—</strong>
+        </div>
+      </div>
+      <p class="editable-hint reveal" id="dateHint">يتم تحديث التاريخ والوقت من ملف الإعدادات بسهولة.</p>
+    </section>
+
+    <section class="countdown-wrap section-pad" id="countdownSection">
+      <div class="section-heading reveal light-heading">
+        <p class="eyebrow">COUNTING DOWN</p>
+        <h2>نعدّ الأيام للقائكم</h2>
+      </div>
+      <div class="countdown reveal" id="countdown" aria-label="العد التنازلي">
+        <div><b id="days">00</b><span>يوم</span></div>
+        <i></i>
+        <div><b id="hours">00</b><span>ساعة</span></div>
+        <i></i>
+        <div><b id="minutes">00</b><span>دقيقة</span></div>
+        <i></i>
+        <div><b id="seconds">00</b><span>ثانية</span></div>
+      </div>
+    </section>
+
+    <section class="place section-pad" id="place">
+      <div class="section-heading reveal">
+        <p class="eyebrow">THE CELEBRATION</p>
+        <h2>مكان الحفل</h2>
+        <div class="heading-line"><i></i><span>✦</span><i></i></div>
+      </div>
+      <div class="place-art reveal" aria-hidden="true">
+        <svg viewBox="0 0 300 180">
+          <path d="M35 145h230M65 145v-44h170v44M88 101V75h124v26M108 75V52h84v23M130 52V34h40v18"/>
+          <path d="M80 145v-26h25v26m19 0v-26h25v26m19 0v-26h25v26m19 0v-26h25v26"/>
+          <circle cx="150" cy="90" r="11"/>
+        </svg>
+      </div>
+      <h3 class="place-name reveal" id="venueName">مكان الحفل</h3>
+      <p class="place-address reveal" id="venueAddress">يُضاف اسم القاعة والموقع هنا</p>
+      <a class="outline-button reveal disabled" id="mapsLink" href="#" aria-disabled="true">
+        <span>فتح الموقع على الخريطة</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.2 6-12A6 6 0 1 0 6 9c0 6.8 6 12 6 12Z"/><circle cx="12" cy="9" r="2.2"/></svg>
+      </a>
+    </section>
+
+    <section class="rsvp section-pad" id="rsvp">
+      <svg class="rsvp-flower rsvp-left" viewBox="0 0 200 300" aria-hidden="true">
+        <path d="M95 290C89 222 99 149 137 74"/>
+        <path d="M104 208c-22-7-45 0-59 18 24 9 48 3 59-18Zm14-54c-25-1-44 11-52 32 27 3 47-9 52-32Zm22-47c-21-9-43-4-58 11 22 12 45 7 58-11Z"/>
+      </svg>
+      <div class="rsvp-box reveal">
+        <p class="eyebrow">RSVP</p>
+        <h2>وجودكم يكمل فرحتنا</h2>
+        <p>يسعدنا تأكيد حضوركم، وسنضيف رابط نموذج الحضور هنا بمجرد تحديده.</p>
+        <a class="solid-button disabled" id="rsvpLink" href="#" aria-disabled="true">تأكيد الحضور</a>
+      </div>
+      <svg class="rsvp-flower rsvp-right" viewBox="0 0 200 300" aria-hidden="true">
+        <path d="M95 290C89 222 99 149 137 74"/>
+        <path d="M104 208c-22-7-45 0-59 18 24 9 48 3 59-18Zm14-54c-25-1-44 11-52 32 27 3 47-9 52-32Zm22-47c-21-9-43-4-58 11 22 12 45 7 58-11Z"/>
+      </svg>
+    </section>
+
+    <footer class="footer section-pad">
+      <p class="footer-ar reveal">بارك الله لنا وبارك علينا وجمع بيننا في خير</p>
+      <div class="footer-monogram reveal"><span>L</span><i>&amp;</i><span>A</span></div>
+      <p class="footer-names reveal">Laith &amp; Anwar</p>
+      <p class="footer-small reveal">We can't wait to celebrate with you.</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

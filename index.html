@@ -178,9 +178,9 @@
   /* Sequential Kareem → and → Nour lockup. */
   .name-lockup{
     position:absolute;
-    left:25%;
-    top:23%;
-    width:50%;
+    left:27%;
+    top:23.5%;
+    width:46%;
     aspect-ratio:477 / 529;
     z-index:2;
     pointer-events:none;
@@ -212,9 +212,9 @@
     from{ opacity:0; }
     to{ opacity:1; }
   }
-  .hero.play-names .name-kareem{ animation:namePieceFade .9s ease 0s forwards; }
-  .hero.play-names .name-and{ animation:namePieceFade .8s ease .65s forwards; }
-  .hero.play-names .name-nour{ animation:namePieceFade .9s ease 1.30s forwards; }
+  .hero.play-names .name-kareem{ animation:namePieceFade .75s ease 0s forwards; }
+  .hero.play-names .name-and{ animation:namePieceFade .7s ease .50s forwards; }
+  .hero.play-names .name-nour{ animation:namePieceFade .75s ease 1s forwards; }
 
   .section-title{ font-family:'Lifta','Amiri',serif; font-size:38px; color:var(--ink); margin:0 0 8px; }
   .divider{ width:60px; height:2px; margin:0 auto 30px; background:linear-gradient(90deg, transparent, var(--apricot), transparent); }
@@ -539,16 +539,14 @@ function openEnvelope(){
         .classList.add("opening");
 
     setTimeout(()=>{
-        document
-            .getElementById("hero")
-            .classList.add("play-names");
-    },1600);
-
-    setTimeout(()=>{
 
         document
             .getElementById("envelope-cover")
             .classList.add("opened");
+
+        document
+            .getElementById("hero")
+            .classList.add("play-names");
 
         document.body.style.overflow = "auto";
 

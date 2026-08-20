@@ -693,19 +693,44 @@ function openEnvelope(){
   }
   updateCd(); setInterval(updateCd,1000);
 
+  const rsvpEndpoint='https://script.google.com/macros/s/AKfycbxl5OgQzTi_McgOUeym2ZS3kywuom8QvV2DzxTp52dHm0NI6JOxryCyO-s3v-XThJDigQ/exec';
   const rsvpForm=document.getElementById('rsvpForm');
   if(rsvpForm){
-    rsvpForm.addEventListener('submit',(e)=>{
+    rsvpForm.addEventListener('submit',async(e)=>{
       e.preventDefault();
       const name=document.getElementById('guestName').value.trim();
       const choice=rsvpForm.querySelector('input[name="attendance"]:checked');
       const message=document.getElementById('rsvpMessage');
+      const submitButton=rsvpForm.querySelector('.rsvp-submit');
       if(!name || !choice) return;
 
-      message.textContent=choice.value==='سأحضر بإذن الله'
-        ? `شكرًا ${name}، يسعدنا حضوركم 🤍`
-        : `شكرًا ${name} لإبلاغنا، نتمنى لكم كل الخير 🤍`;
-      message.classList.add('show');
+      const attendance=choice.value;
+      submitButton.disabled=true;
+      submitButton.textContent='جارٍ الإرسال...';
+      message.classList.remove('show');
+
+      try{
+        await fetch(rsvpEndpoint,{
+          method:'POST',
+          mode:'no-cors',
+          body:new URLSearchParams({
+            guestName:name,
+            attendance:attendance
+          })
+        });
+
+        message.textContent=attendance==='سأحضر بإذن الله'
+          ? `شكرًا ${name}، يسعدنا حضوركم 🤍`
+          : `شكرًا ${name} لإبلاغنا، نتمنى لكم كل الخير 🤍`;
+        message.classList.add('show');
+        rsvpForm.reset();
+      }catch(error){
+        message.textContent='تعذر إرسال التأكيد، حاول مرة أخرى.';
+        message.classList.add('show');
+      }finally{
+        submitButton.disabled=false;
+        submitButton.textContent='إرسال';
+      }
     });
   }
 

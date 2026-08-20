@@ -535,34 +535,26 @@ function openEnvelope(){
 
     tryPlay();
 
-    document
-        .getElementById("invite")
-        .classList.add("shown");
+    const invite = document.getElementById("invite");
+    invite.style.transition = "none";
+    invite.classList.add("shown");
 
     document
-        .querySelector(".envelope-full")
-        .classList.add("opening");
+        .getElementById("envelope-cover")
+        .classList.add("opened");
+
+    document.body.style.overflow = "auto";
+
+    window.scrollTo({
+        top:0,
+        behavior:"auto"
+    });
 
     setTimeout(()=>{
-
         document
-            .getElementById("envelope-cover")
-            .classList.add("opened");
-
-        document.body.style.overflow = "auto";
-
-        window.scrollTo({
-            top:0,
-            behavior:"smooth"
-        });
-
-        setTimeout(()=>{
-            document
-                .getElementById("hero")
-                .classList.add("play-names");
-        },1000);
-
-    },1700);
+            .getElementById("hero")
+            .classList.add("play-names");
+    },1000);
 
 }
 

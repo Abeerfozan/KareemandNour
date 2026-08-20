@@ -301,6 +301,97 @@
   .dir-btn{ margin-top:26px; display:inline-flex; align-items:center; gap:8px; border:1px solid var(--apricot-deep); color:var(--ink); background:transparent; padding:13px 30px; border-radius:30px; font-family:'Amiri',serif; font-size:16px; cursor:pointer; text-decoration:none; }
   .dir-btn:hover{ background:var(--apricot-deep); color:#fff; }
 
+  .rsvp{
+    background:linear-gradient(180deg, transparent 0%, rgba(231,212,214,.10) 24%, rgba(231,212,214,.22) 72%, transparent 100%);
+    padding-top:82px;
+    padding-bottom:82px;
+  }
+  .rsvp-subtitle{
+    margin:0 auto 30px;
+    max-width:320px;
+    font-size:18px;
+    line-height:1.8;
+    color:var(--ink-soft);
+  }
+  .rsvp-form{ max-width:350px; margin:0 auto; }
+  .rsvp-input{
+    width:100%;
+    height:52px;
+    border:1px solid rgba(190,165,170,.65);
+    background:rgba(255,253,248,.88);
+    color:var(--ink);
+    border-radius:14px;
+    padding:0 18px;
+    font-family:'Amiri',serif;
+    font-size:17px;
+    text-align:right;
+    outline:none;
+    transition:border-color .25s ease, box-shadow .25s ease, background .25s ease;
+  }
+  .rsvp-input::placeholder{ color:rgba(92,76,86,.65); }
+  .rsvp-input:focus{
+    border-color:var(--gold);
+    background:#fffdf8;
+    box-shadow:0 0 0 3px rgba(190,165,170,.12);
+  }
+  .rsvp-options{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin:14px 0 18px;
+  }
+  .rsvp-option{ cursor:pointer; }
+  .rsvp-option input{
+    position:absolute;
+    opacity:0;
+    pointer-events:none;
+  }
+  .rsvp-option span{
+    min-height:54px;
+    padding:10px 12px;
+    border:1px solid rgba(190,165,170,.55);
+    border-radius:14px;
+    background:rgba(255,253,248,.72);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:15px;
+    line-height:1.45;
+    color:var(--ink);
+    transition:all .25s ease;
+  }
+  .rsvp-option input:checked + span{
+    background:#e7d4d6;
+    border-color:#bea5aa;
+    box-shadow:0 7px 18px rgba(190,165,170,.22);
+  }
+  .rsvp-submit{
+    width:100%;
+    height:50px;
+    border:0;
+    border-radius:28px;
+    background:#bea5aa;
+    color:#fff;
+    font-family:'Amiri',serif;
+    font-size:17px;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(190,165,170,.30);
+    transition:transform .2s ease, opacity .2s ease, box-shadow .2s ease;
+  }
+  .rsvp-submit:hover{ transform:translateY(-1px); box-shadow:0 11px 24px rgba(190,165,170,.35); }
+  .rsvp-submit:active{ transform:translateY(0); }
+  .rsvp-message{
+    min-height:28px;
+    margin-top:14px;
+    font-size:15px;
+    line-height:1.7;
+    color:var(--ink-soft);
+    opacity:0;
+    transform:translateY(5px);
+    transition:opacity .3s ease, transform .3s ease;
+  }
+  .rsvp-message.show{ opacity:1; transform:translateY(0); }
+
   .closing{ background:linear-gradient(180deg, transparent 0%, rgba(231,212,214,.10) 28%, rgba(231,212,214,.20) 68%, transparent 100%); padding-bottom:40px; }
   .closing-heart{ color:var(--apricot-deep); font-size:26px; margin:0 0 14px; }
   .closing-text{ font-family:'Amiri',serif; font-size:20px; line-height:2.1; color:var(--ink-soft); max-width:340px; margin:0 auto; }
@@ -473,6 +564,30 @@
     </div>
   </section>
 
+  <section class="block rsvp">
+    <h2 class="section-title fade-in">حضوركم يهمنا</h2>
+    <div class="divider fade-in"></div>
+    <p class="rsvp-subtitle fade-in">يسرنا تأكيد حضوركم بضغطة واحدة</p>
+
+    <form class="rsvp-form fade-in" id="rsvpForm">
+      <input class="rsvp-input" id="guestName" name="guestName" type="text" placeholder="اسمك" autocomplete="name" required>
+
+      <div class="rsvp-options">
+        <label class="rsvp-option">
+          <input type="radio" name="attendance" value="سأحضر بإذن الله" required>
+          <span>سأحضر بإذن الله</span>
+        </label>
+        <label class="rsvp-option">
+          <input type="radio" name="attendance" value="أعتذر عن الحضور" required>
+          <span>أعتذر عن الحضور</span>
+        </label>
+      </div>
+
+      <button class="rsvp-submit" type="submit">إرسال</button>
+      <div class="rsvp-message" id="rsvpMessage" aria-live="polite"></div>
+    </form>
+  </section>
+
   <section class="block closing">
     <div class="closing-heart fade-in">♥</div>
     <p class="closing-text fade-in">ننتظر حضوركم بكل شوق، لتكتمل فرحتنا وتبقى هذه الليلة ذكرى جميلة تجمعنا بكم.</p>
@@ -578,6 +693,22 @@ function openEnvelope(){
     document.getElementById('cd-secs').textContent=toAr(Math.floor(diff/1000)%60);
   }
   updateCd(); setInterval(updateCd,1000);
+
+  const rsvpForm=document.getElementById('rsvpForm');
+  if(rsvpForm){
+    rsvpForm.addEventListener('submit',(e)=>{
+      e.preventDefault();
+      const name=document.getElementById('guestName').value.trim();
+      const choice=rsvpForm.querySelector('input[name="attendance"]:checked');
+      const message=document.getElementById('rsvpMessage');
+      if(!name || !choice) return;
+
+      message.textContent=choice.value==='سأحضر بإذن الله'
+        ? `شكرًا ${name}، يسعدنا حضوركم 🤍`
+        : `شكرًا ${name} لإبلاغنا، نتمنى لكم كل الخير 🤍`;
+      message.classList.add('show');
+    });
+  }
 
   const obs=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});},{threshold:0.2});
   document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));

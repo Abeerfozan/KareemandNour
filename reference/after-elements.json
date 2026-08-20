@@ -1,0 +1,221 @@
+{
+  "title": "Laith&Anwar",
+  "url": "https://amjadko.my.canva.site/laithandanwar",
+  "scrollHeight": 844,
+  "texts": [
+    {
+      "tag": "DIV",
+      "text": "اضغط لــفتح الـدعوة Terms & Support Privacy Policy Designed with",
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "font": "\"Times New Roman\"",
+      "size": "10px",
+      "weight": "400",
+      "color": "rgb(0, 0, 0)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "align": "start"
+    },
+    {
+      "tag": "DIV",
+      "text": "اضغط لــفتح الـدعوة",
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "font": "\"Times New Roman\"",
+      "size": "10px",
+      "weight": "400",
+      "color": "rgb(0, 0, 0)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "align": "start"
+    },
+    {
+      "tag": "DIV",
+      "text": "اضغط لــفتح الـدعوة",
+      "x": 0,
+      "y": 629,
+      "w": 390,
+      "h": 21,
+      "font": "\"Times New Roman\"",
+      "size": "10px",
+      "weight": "400",
+      "color": "rgb(0, 0, 0)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "align": "start"
+    },
+    {
+      "tag": "DIV",
+      "text": "اضغط لــفتح الـدعوة",
+      "x": 0,
+      "y": 627,
+      "w": 390,
+      "h": 25,
+      "font": "\"Times New Roman\"",
+      "size": "10px",
+      "weight": "400",
+      "color": "rgb(0, 0, 0)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "align": "start"
+    },
+    {
+      "tag": "SPAN",
+      "text": "اضغط لــفتح الـدعوة",
+      "x": 136,
+      "y": 624,
+      "w": 118,
+      "h": 31,
+      "font": "YAEWgjWFb1M_0, auto",
+      "size": "62.2451px",
+      "weight": "700",
+      "color": "rgb(243, 236, 220)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "align": "center"
+    },
+    {
+      "tag": "DIV",
+      "text": "Terms & Support Privacy Policy Designed with",
+      "x": 0,
+      "y": 844,
+      "w": 390,
+      "h": 35,
+      "font": "\"Times New Roman\"",
+      "size": "10px",
+      "weight": "400",
+      "color": "rgb(0, 0, 0)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "align": "start"
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Terms & Support",
+      "x": 272,
+      "y": 850,
+      "w": 112,
+      "h": 23,
+      "font": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Arial, sans-serif",
+      "size": "12px",
+      "weight": "600",
+      "color": "rgb(255, 255, 255)",
+      "bg": "rgba(255, 255, 255, 0)",
+      "align": "center"
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Privacy Policy",
+      "x": 166,
+      "y": 850,
+      "w": 97,
+      "h": 23,
+      "font": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Arial, sans-serif",
+      "size": "12px",
+      "weight": "600",
+      "color": "rgb(255, 255, 255)",
+      "bg": "rgba(255, 255, 255, 0)",
+      "align": "center"
+    },
+    {
+      "tag": "A",
+      "text": "Designed with",
+      "x": 16,
+      "y": 850,
+      "w": 142,
+      "h": 23,
+      "font": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Arial, sans-serif",
+      "size": "12px",
+      "weight": "600",
+      "color": "rgb(255, 255, 255)",
+      "bg": "rgba(255, 255, 255, 0.1)",
+      "align": "start"
+    }
+  ],
+  "media": [
+    {
+      "tag": "VIDEO",
+      "src": "https://amjadko.my.canva.site/laithandanwar/_assets/video/71e798ca6eb5933d9ad20837a29ca807.mp4",
+      "x": -101,
+      "y": -44,
+      "w": 531,
+      "h": 916
+    },
+    {
+      "tag": "IMG",
+      "src": "https://amjadko.my.canva.site/laithandanwar/_assets/media/5253cc7472634881410681895888a69f.png",
+      "x": 39,
+      "y": 406,
+      "w": 312,
+      "h": 204
+    },
+    {
+      "tag": "IMG",
+      "src": "https://amjadko.my.canva.site/laithandanwar/_assets/media/5253cc7472634881410681895888a69f.png",
+      "x": 39,
+      "y": 406,
+      "w": 312,
+      "h": 204
+    },
+    {
+      "tag": "IMG",
+      "src": "https://amjadko.my.canva.site/laithandanwar/_assets/media/5253cc7472634881410681895888a69f.png",
+      "x": 39,
+      "y": 406,
+      "w": 312,
+      "h": 204
+    },
+    {
+      "tag": "IMG",
+      "src": "https://amjadko.my.canva.site/laithandanwar/_assets/media/5253cc7472634881410681895888a69f.png",
+      "x": 39,
+      "y": 406,
+      "w": 312,
+      "h": 204
+    },
+    {
+      "tag": "IMG",
+      "src": "https://amjadko.my.canva.site/laithandanwar/_assets/media/a6e2e1282b79d6878365d8f42e577d3c.png",
+      "x": 169,
+      "y": 511,
+      "w": 52,
+      "h": 46
+    },
+    {
+      "tag": "IMG",
+      "src": "https://amjadko.my.canva.site/laithandanwar/_assets/media/a10fba54e814931ce98f45e13c2385a3.png",
+      "x": 182,
+      "y": 520,
+      "w": 26,
+      "h": 26
+    }
+  ],
+  "links": [
+    {
+      "text": "",
+      "href": "https://amjadko.my.canva.site/laithandanwar/#page-0"
+    },
+    {
+      "text": "",
+      "href": "https://amjadko.my.canva.site/laithandanwar/#page-0"
+    },
+    {
+      "text": "",
+      "href": "https://amjadko.my.canva.site/laithandanwar/#page-0"
+    },
+    {
+      "text": "Designed with",
+      "href": "https://www.canva.com/"
+    },
+    {
+      "text": "",
+      "href": "https://www.canva.com/policies/terms-of-use/"
+    },
+    {
+      "text": "",
+      "href": "https://www.canva.com/policies/acceptable-use-policy/"
+    },
+    {
+      "text": "",
+      "href": "https://www.canva.com/policies/privacy-policy/"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-name: Capture Canva After Open
+name: Test Laith Anwar Invitation
 
 on:
   push:
@@ -9,11 +9,10 @@ on:
       - main
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  capture:
-    if: github.actor != 'github-actions[bot]'
+  browser-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,66 +21,46 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Install Playwright
+      - name: Install browser
         run: |
           npm init -y
           npm install playwright
           npx playwright install --with-deps chromium
-      - name: Capture opened invitation
+      - name: Run invitation browser test
         run: |
-          mkdir -p reference
+          python3 -m http.server 4173 --directory laith-anwar >/tmp/invitation-server.log 2>&1 &
           node <<'NODE'
           const { chromium } = require('playwright');
-          const fs = require('fs');
           (async () => {
             const browser = await chromium.launch({ headless: true });
-            const page = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1 });
-            const base = 'https://amjadko.my.canva.site/laithandanwar';
-            await page.goto(base, { waitUntil: 'networkidle', timeout: 120000 });
-            await page.waitForTimeout(3500);
-            const anchor = page.locator('a[href="#page-0"]').first();
-            if (await anchor.count()) {
-              await anchor.click({ force: true }).catch(()=>{});
-              await page.waitForTimeout(3000);
+            const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+            const errors = [];
+            page.on('pageerror', e => errors.push(e.message));
+            page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
+
+            await page.goto('http://127.0.0.1:4173', { waitUntil: 'networkidle', timeout: 60000 });
+            await page.locator('#openInvitation').click();
+            await page.waitForTimeout(700);
+
+            if (!(await page.locator('#invitation').evaluate(el => el.classList.contains('visible')))) {
+              throw new Error('Invitation did not become visible after opening.');
             }
-            if (!page.url().includes('#page-0')) {
-              await page.goto(base + '/#page-0', { waitUntil: 'networkidle', timeout: 120000 });
-              await page.waitForTimeout(5000);
+            if (await page.locator('#cover').evaluate(el => !el.classList.contains('is-open'))) {
+              throw new Error('Cover did not transition to open state.');
             }
-            await page.evaluate(() => { location.hash = '#page-0'; });
-            await page.waitForTimeout(5000);
-            await page.screenshot({ path: 'reference/after-mobile.png', fullPage: true });
-            fs.writeFileSync('reference/after-page.html', await page.content(), 'utf8');
-            fs.writeFileSync('reference/after-body.txt', await page.locator('body').innerText().catch(() => ''), 'utf8');
-            const data = await page.evaluate(() => {
-              const clean = s => (s || '').replace(/\s+/g,' ').trim();
-              const visible = el => {
-                const r = el.getBoundingClientRect();
-                const cs = getComputedStyle(el);
-                return r.width > 1 && r.height > 1 && cs.display !== 'none' && cs.visibility !== 'hidden' && Number(cs.opacity || 1) > 0;
-              };
-              const texts = [...document.querySelectorAll('p,span,h1,h2,h3,h4,h5,h6,div,a,button')]
-                .filter(visible)
-                .map(el => {
-                  const t = clean(el.innerText);
-                  if (!t || t.length > 250) return null;
-                  const r = el.getBoundingClientRect();
-                  const cs = getComputedStyle(el);
-                  return {tag:el.tagName,text:t,x:Math.round(r.x),y:Math.round(r.y+scrollY),w:Math.round(r.width),h:Math.round(r.height),font:cs.fontFamily,size:cs.fontSize,weight:cs.fontWeight,color:cs.color,bg:cs.backgroundColor,align:cs.textAlign};
-                }).filter(Boolean)
-                .filter((v,i,a)=>a.findIndex(x=>x.text===v.text && x.x===v.x && x.y===v.y)===i);
-              const media = [...document.querySelectorAll('img,video')].filter(visible).map(el=>{const r=el.getBoundingClientRect();return {tag:el.tagName,src:el.currentSrc||el.src,x:Math.round(r.x),y:Math.round(r.y+scrollY),w:Math.round(r.width),h:Math.round(r.height)};});
-              const links = [...document.querySelectorAll('a')].map(a=>({text:clean(a.innerText),href:a.href})).filter(x=>x.href);
-              return {title:document.title,url:location.href,hash:location.hash,scrollHeight:document.documentElement.scrollHeight,texts,media,links};
-            });
-            fs.writeFileSync('reference/after-elements.json', JSON.stringify(data,null,2));
+            const text = await page.locator('body').innerText();
+            for (const required of ['٢٦ سبتمبر ٢٠٢٦','صالة الشرق للاحتفالات','حضوركم يُهمّنا']) {
+              if (!text.includes(required)) throw new Error(`Missing required invitation text: ${required}`);
+            }
+            await page.locator('#rsvpButton').scrollIntoViewIfNeeded();
+            await page.locator('#rsvpButton').click();
+            await page.waitForTimeout(200);
+            if (!(await page.locator('#toast').evaluate(el => el.classList.contains('show')))) {
+              throw new Error('RSVP interaction did not show confirmation note.');
+            }
+            if (errors.length) throw new Error('Browser errors: ' + errors.join(' | '));
+
+            console.log('Invitation browser test passed.');
             await browser.close();
           })();
           NODE
-      - name: Commit capture
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- reference/after-mobile.png reference/after-page.html reference/after-body.txt reference/after-elements.json
-          git commit -m "chore: recapture opened Canva invitation" || exit 0
-          git push origin HEAD:laith-anwar-rebuild

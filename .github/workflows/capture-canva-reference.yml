@@ -1,0 +1,59 @@
+name: Capture Canva Reference
+
+on:
+  push:
+    branches:
+      - laith-anwar-rebuild
+
+permissions:
+  contents: write
+
+jobs:
+  capture:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: laith-anwar-rebuild
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install Playwright
+        run: |
+          npm init -y
+          npm install playwright
+          npx playwright install --with-deps chromium
+      - name: Capture reference
+        run: |
+          mkdir -p reference
+          node <<'NODE'
+          const { chromium } = require('playwright');
+          (async () => {
+            const browser = await chromium.launch({ headless: true });
+            const url = 'https://amjadko.my.canva.site/laithandanwar';
+
+            const desktop = await browser.newPage({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor: 1 });
+            await desktop.goto(url, { waitUntil: 'networkidle', timeout: 120000 });
+            await desktop.waitForTimeout(5000);
+            await desktop.screenshot({ path: 'reference/desktop.png', fullPage: true });
+            const html = await desktop.content();
+            require('fs').writeFileSync('reference/page.html', html, 'utf8');
+            const text = await desktop.locator('body').innerText().catch(() => '');
+            require('fs').writeFileSync('reference/body.txt', text, 'utf8');
+
+            const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1 });
+            await mobile.goto(url, { waitUntil: 'networkidle', timeout: 120000 });
+            await mobile.waitForTimeout(5000);
+            await mobile.screenshot({ path: 'reference/mobile.png', fullPage: true });
+
+            await browser.close();
+          })();
+          NODE
+      - name: Commit capture
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- reference/desktop.png reference/mobile.png reference/page.html reference/body.txt
+          git commit -m "chore: capture Canva invitation reference" || exit 0
+          git push origin HEAD:laith-anwar-rebuild

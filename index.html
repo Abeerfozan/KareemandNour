@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>نور و كريم — دعوة زفاف</title>
+<link rel="preload" as="image" href="assets/wax.png">
 <style>
   @font-face{
     font-family:'Amiri';
@@ -123,11 +124,12 @@
   .wax-seal{
     position:absolute; left:50%; top:50%; z-index:50;
     width:clamp(92px,13vw,142px); height:auto;
+    opacity:1; visibility:visible;
     transform:translate(-50%,-50%) scale(1);
     filter:drop-shadow(0 12px 12px rgba(72,38,30,.28));
     animation:waxPulse 3.2s ease-in-out infinite;
-    transition:opacity 280ms ease,transform 340ms cubic-bezier(.4,0,.7,.2);
-    will-change:transform,opacity;
+    transition:none;
+    will-change:transform;
   }
   @keyframes waxPulse{
     0%,100%{transform:translate(-50%,-50%) scale(1)}
@@ -148,8 +150,16 @@
   .opening .env-bottom{transform:rotateX(-178deg);filter:drop-shadow(0 -30px 25px rgba(71,43,35,.12))}
   .opening .env-left{transform:rotateY(-178deg);filter:drop-shadow(30px 0 25px rgba(71,43,35,.12))}
   .opening .env-right{transform:rotateY(178deg);filter:drop-shadow(-30px 0 25px rgba(71,43,35,.12))}
-  .opening .wax-seal,.opening .wax-seal-glow{
-    animation:none; opacity:0; transform:translate(-50%,-50%) scale(.34);
+  .opening .wax-seal{
+    animation:none;
+    opacity:0;
+    transform:translate(-50%,-50%) scale(.34);
+    transition:opacity 280ms ease,transform 340ms cubic-bezier(.4,0,.7,.2);
+  }
+  .opening .wax-seal-glow{
+    animation:none;
+    opacity:0;
+    transform:translate(-50%,-50%) scale(.34);
   }
   .opening .tap-hint{opacity:0}
 
@@ -382,7 +392,7 @@
 
     <div class="env-bottom"></div>
 
-      <img src="assets/wax.png" class="wax-seal" alt="">
+      <img src="assets/wax.png" class="wax-seal" alt="" fetchpriority="high" decoding="sync">
 
         <div class="tap-hint">
             انقر لفتح الدعوة
@@ -535,6 +545,10 @@ function openEnvelope(){
         .classList.add("shown");
 
     document
+        .getElementById("hero")
+        .classList.add("play-names");
+
+    document
         .querySelector(".envelope-full")
         .classList.add("opening");
 
@@ -543,10 +557,6 @@ function openEnvelope(){
         document
             .getElementById("envelope-cover")
             .classList.add("opened");
-
-        document
-            .getElementById("hero")
-            .classList.add("play-names");
 
         document.body.style.overflow = "auto";
 

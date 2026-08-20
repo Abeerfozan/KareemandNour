@@ -53,6 +53,80 @@
     100%{ transform:translateY(105vh) rotate(360deg); opacity:0.25; }
   }
 
+  /* ===== EXPERIMENT: ANIMATED BOTANICAL SIDES ===== */
+  .botanical-sides{
+    position:fixed;
+    inset:0;
+    z-index:24;
+    overflow:hidden;
+    pointer-events:none;
+  }
+  .botanical-branch{
+    position:absolute;
+    width:clamp(118px,18vw,178px);
+    opacity:.58;
+    will-change:transform;
+    filter:drop-shadow(0 7px 12px rgba(92,76,86,.07));
+  }
+  .botanical-left{
+    left:-72px;
+    top:13%;
+    transform-origin:16% 88%;
+    animation:branchSwayLeft 7.2s ease-in-out infinite;
+  }
+  .botanical-right{
+    right:-72px;
+    top:48%;
+    transform-origin:84% 88%;
+    animation:branchSwayRight 8.1s ease-in-out infinite;
+  }
+  .botanical-right .botanical-art{
+    transform:scaleX(-1);
+    transform-origin:center;
+  }
+  .botanical-art{ display:block; width:100%; height:auto; overflow:visible; }
+  .botanical-stem{
+    fill:none;
+    stroke:#8a7079;
+    stroke-width:2.2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    opacity:.72;
+  }
+  .botanical-twig{
+    fill:none;
+    stroke:#a98d95;
+    stroke-width:1.5;
+    stroke-linecap:round;
+    opacity:.72;
+  }
+  .botanical-leaf{ transform-box:fill-box; transform-origin:50% 95%; }
+  .botanical-leaf.a{ fill:#b3979f; animation:leafFlutter 5.6s ease-in-out infinite; }
+  .botanical-leaf.b{ fill:#c9b0b6; animation:leafFlutter 6.2s ease-in-out -1.7s infinite; }
+  .botanical-leaf.c{ fill:#dcc7cb; animation:leafFlutter 5.1s ease-in-out -.9s infinite; }
+  .botanical-bloom{ fill:#e7d4d6; opacity:.92; transform-box:fill-box; transform-origin:center; animation:bloomBreathe 6.6s ease-in-out infinite; }
+  @keyframes branchSwayLeft{
+    0%,100%{ transform:rotate(-1.4deg) translate3d(0,0,0); }
+    50%{ transform:rotate(1.8deg) translate3d(3px,-2px,0); }
+  }
+  @keyframes branchSwayRight{
+    0%,100%{ transform:rotate(1.1deg) translate3d(0,0,0); }
+    50%{ transform:rotate(-1.6deg) translate3d(-3px,-2px,0); }
+  }
+  @keyframes leafFlutter{
+    0%,100%{ transform:rotate(-2deg) scale(1); }
+    50%{ transform:rotate(4deg) scale(1.025); }
+  }
+  @keyframes bloomBreathe{
+    0%,100%{ transform:scale(.98); opacity:.84; }
+    50%{ transform:scale(1.04); opacity:1; }
+  }
+  @media (max-width:520px){
+    .botanical-branch{ width:124px; opacity:.48; }
+    .botanical-left{ left:-78px; top:15%; }
+    .botanical-right{ right:-78px; top:52%; }
+  }
+
   /* ===== FULL SCREEN ENVELOPE ===== */
   #envelope-cover{
     position:fixed; inset:0; z-index:999; overflow:hidden;
@@ -482,6 +556,7 @@
     .petal{ display:none; }
     .fade-in{ transition:none; opacity:1; transform:none; }
     .hero.play-names .name-piece{ animation:none; opacity:1; }
+    .botanical-branch,.botanical-leaf,.botanical-bloom{ animation:none !important; }
   }
 </style>
 </head>
@@ -521,6 +596,56 @@
 
 <!-- MAIN INVITE -->
 <div id="invite">
+
+  <div class="botanical-sides" aria-hidden="true">
+    <div class="botanical-branch botanical-left">
+      <svg class="botanical-art" viewBox="0 0 170 420" xmlns="http://www.w3.org/2000/svg">
+        <path class="botanical-stem" d="M32 407 C46 334 39 276 68 214 C91 164 92 103 122 20"/>
+        <path class="botanical-twig" d="M50 333 C72 322 88 305 101 283"/>
+        <path class="botanical-twig" d="M59 278 C42 258 32 237 28 214"/>
+        <path class="botanical-twig" d="M77 229 C101 213 116 194 125 172"/>
+        <path class="botanical-twig" d="M88 178 C71 159 62 140 60 119"/>
+        <path class="botanical-twig" d="M103 119 C124 104 136 87 143 69"/>
+        <ellipse class="botanical-leaf a" cx="72" cy="318" rx="11" ry="22" transform="rotate(48 72 318)"/>
+        <ellipse class="botanical-leaf c" cx="95" cy="292" rx="10" ry="20" transform="rotate(37 95 292)"/>
+        <ellipse class="botanical-leaf b" cx="39" cy="252" rx="10" ry="21" transform="rotate(-43 39 252)"/>
+        <ellipse class="botanical-leaf a" cx="29" cy="220" rx="8" ry="18" transform="rotate(-30 29 220)"/>
+        <ellipse class="botanical-leaf c" cx="105" cy="207" rx="11" ry="22" transform="rotate(52 105 207)"/>
+        <ellipse class="botanical-leaf b" cx="122" cy="181" rx="9" ry="19" transform="rotate(40 122 181)"/>
+        <ellipse class="botanical-leaf a" cx="71" cy="153" rx="10" ry="21" transform="rotate(-38 71 153)"/>
+        <ellipse class="botanical-leaf c" cx="61" cy="123" rx="8" ry="18" transform="rotate(-28 61 123)"/>
+        <ellipse class="botanical-leaf b" cx="126" cy="101" rx="10" ry="21" transform="rotate(45 126 101)"/>
+        <ellipse class="botanical-leaf a" cx="141" cy="74" rx="8" ry="17" transform="rotate(35 141 74)"/>
+        <circle class="botanical-bloom" cx="122" cy="20" r="9"/>
+        <circle class="botanical-bloom" cx="114" cy="24" r="6"/>
+        <circle class="botanical-bloom" cx="129" cy="27" r="6"/>
+      </svg>
+    </div>
+
+    <div class="botanical-branch botanical-right">
+      <svg class="botanical-art" viewBox="0 0 170 420" xmlns="http://www.w3.org/2000/svg">
+        <path class="botanical-stem" d="M32 407 C46 334 39 276 68 214 C91 164 92 103 122 20"/>
+        <path class="botanical-twig" d="M50 333 C72 322 88 305 101 283"/>
+        <path class="botanical-twig" d="M59 278 C42 258 32 237 28 214"/>
+        <path class="botanical-twig" d="M77 229 C101 213 116 194 125 172"/>
+        <path class="botanical-twig" d="M88 178 C71 159 62 140 60 119"/>
+        <path class="botanical-twig" d="M103 119 C124 104 136 87 143 69"/>
+        <ellipse class="botanical-leaf a" cx="72" cy="318" rx="11" ry="22" transform="rotate(48 72 318)"/>
+        <ellipse class="botanical-leaf c" cx="95" cy="292" rx="10" ry="20" transform="rotate(37 95 292)"/>
+        <ellipse class="botanical-leaf b" cx="39" cy="252" rx="10" ry="21" transform="rotate(-43 39 252)"/>
+        <ellipse class="botanical-leaf a" cx="29" cy="220" rx="8" ry="18" transform="rotate(-30 29 220)"/>
+        <ellipse class="botanical-leaf c" cx="105" cy="207" rx="11" ry="22" transform="rotate(52 105 207)"/>
+        <ellipse class="botanical-leaf b" cx="122" cy="181" rx="9" ry="19" transform="rotate(40 122 181)"/>
+        <ellipse class="botanical-leaf a" cx="71" cy="153" rx="10" ry="21" transform="rotate(-38 71 153)"/>
+        <ellipse class="botanical-leaf c" cx="61" cy="123" rx="8" ry="18" transform="rotate(-28 61 123)"/>
+        <ellipse class="botanical-leaf b" cx="126" cy="101" rx="10" ry="21" transform="rotate(45 126 101)"/>
+        <ellipse class="botanical-leaf a" cx="141" cy="74" rx="8" ry="17" transform="rotate(35 141 74)"/>
+        <circle class="botanical-bloom" cx="122" cy="20" r="9"/>
+        <circle class="botanical-bloom" cx="114" cy="24" r="6"/>
+        <circle class="botanical-bloom" cx="129" cy="27" r="6"/>
+      </svg>
+    </div>
+  </div>
 
   <section class="block hero" id="hero">
     <img class="arch-img" src="assets/sky4.png" alt="دعوة الزفاف">

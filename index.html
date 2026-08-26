@@ -431,6 +431,20 @@
   }
   .rsvp-message.show{ opacity:1; transform:translateY(0); }
 
+  .post-rsvp-note{
+    padding-top:38px;
+    padding-bottom:112px;
+    background:var(--cream);
+  }
+  .post-rsvp-note p{
+    font-family:'Amiri',serif;
+    font-size:20px;
+    line-height:2.1;
+    color:var(--ink-soft);
+    max-width:340px;
+    margin:0 auto;
+  }
+
   .closing{
     position:relative;
     margin-top:92px;
@@ -448,14 +462,6 @@
     pointer-events:none;
   }
   .footer-wave svg{ display:block; width:100%; height:100%; }
-  .closing-text{
-    font-family:'Amiri',serif;
-    font-size:20px;
-    line-height:2.1;
-    color:#5c4c56;
-    max-width:340px;
-    margin:0 auto 58px;
-  }
 
   .mg-footer{
     background:transparent;
@@ -518,17 +524,19 @@
     font-size:14px;
     line-height:1;
   }
-  .footer-note{
-    margin:0 0 8px;
-    color:#5c4c56;
-    font-size:14px;
-  }
   .footer-copy{
     margin:0;
     color:rgba(92,76,86,.82);
     font-size:12px;
     line-height:1.8;
+    direction:ltr;
+    unicode-bidi:isolate;
+    text-align:center;
+  }
+  .footer-copy .rights-ar{
     direction:rtl;
+    unicode-bidi:isolate;
+    display:inline-block;
   }
 
   .music-toggle{ position:fixed; bottom:18px; left:18px; z-index:55; width:46px; height:46px; border-radius:50%; background:rgba(255,255,255,0.8); backdrop-filter:blur(6px); border:1px solid rgba(198,154,84,0.35); display:none; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,0.12); }
@@ -683,6 +691,10 @@
     </form>
   </section>
 
+  <section class="block post-rsvp-note">
+    <p class="fade-in">ننتظر حضوركم بكل شوق، لتكتمل فرحتنا وتبقى هذه الليلة ذكرى جميلة تجمعنا بكم.</p>
+  </section>
+
   <section class="block closing">
     <div class="footer-wave" aria-hidden="true">
       <svg viewBox="0 0 480 94" preserveAspectRatio="none">
@@ -690,8 +702,6 @@
         <path d="M0 44 C86 15 152 87 240 73 C328 59 395 15 480 44 L480 94 L0 94 Z" fill="#bea5aa"/>
       </svg>
     </div>
-
-    <p class="closing-text fade-in">ننتظر حضوركم بكل شوق، لتكتمل فرحتنا وتبقى هذه الليلة ذكرى جميلة تجمعنا بكم.</p>
 
     <div class="mg-footer">
       <img class="mg-logo" src="assets/magical-logo.png" alt="Magical Gallery">
@@ -701,8 +711,7 @@
       </a>
 
       <div class="footer-divider"><span>✦</span></div>
-      <p class="footer-note">صُممت بحب لتبقى الذكرى أجمل</p>
-      <p class="footer-copy">© 2026 Magical Gallery · جميع الحقوق محفوظة.</p>
+      <p class="footer-copy" dir="ltr">© 2026 Magical Gallery · <span class="rights-ar" dir="rtl">جميع الحقوق محفوظة.</span></p>
     </div>
   </section>
 

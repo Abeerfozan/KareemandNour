@@ -56,13 +56,18 @@
   /* ===== FULL SCREEN ENVELOPE ===== */
   #envelope-cover{
     position:fixed; inset:0; z-index:999; overflow:hidden;
-    background:transparent; cursor:pointer;
+    background:var(--cream); cursor:pointer;
     perspective:1400px; perspective-origin:50% 50%;
   }
   #envelope-cover.opened{ visibility:hidden; pointer-events:none; }
   .envelope-full{
-    position:relative; width:100%; height:100%; overflow:hidden;
-    transform-style:preserve-3d; isolation:isolate;
+    position:relative;
+    width:min(100%,480px);
+    height:100%;
+    margin:0 auto;
+    overflow:hidden;
+    transform-style:preserve-3d;
+    isolation:isolate;
   }
   .envelope-full::before{
     content:""; position:absolute; inset:0; z-index:0;

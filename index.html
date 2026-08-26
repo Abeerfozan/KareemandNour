@@ -769,7 +769,6 @@
   <section class="block closing">
     <div class="footer-wave" aria-hidden="true">
       <svg viewBox="0 0 480 94" preserveAspectRatio="none">
-        <path d="M0 31 C84 1 151 73 240 62 C329 51 394 2 480 31 L480 94 L0 94 Z" fill="#eadde0"/>
         <path d="M0 44 C86 15 152 87 240 73 C328 59 395 15 480 44 L480 94 L0 94 Z" fill="#5c4c56"/>
       </svg>
     </div>
@@ -906,8 +905,8 @@ function openEnvelope(){
         });
 
         message.textContent=attendance==='سأحضر بإذن الله'
-          ? `شكرًا ${name}، يسعدنا حضوركم 🤍`
-          : `شكرًا ${name} لإبلاغنا، نتمنى لكم كل الخير 🤍`;
+          ? `شكرًا ${name}، يسعدنا حضوركم`
+          : `شكرًا ${name} لإبلاغنا، نتمنى لكم كل الخير`;
         message.classList.add('show');
         rsvpForm.reset();
       }catch(error){

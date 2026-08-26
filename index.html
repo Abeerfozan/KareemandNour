@@ -432,83 +432,104 @@
   .rsvp-message.show{ opacity:1; transform:translateY(0); }
 
   .closing{
-    background:linear-gradient(
-      180deg,
-      #fdf9f3 0%,
-      #fbf6f2 10%,
-      #f7efed 20%,
-      #f0e5e5 31%,
-      #e7d4d6 42%,
-      #dcc7cb 53%,
-      #c9b0b6 64%,
-      #b3979f 74%,
-      #967a83 84%,
-      #7a626c 92%,
-      #66535d 97%,
-      #5c4c56 100%
-    );
-    padding-top:42px;
-    padding-bottom:28px;
+    position:relative;
+    margin-top:92px;
+    background:#bea5aa;
+    padding:38px 26px 24px;
+    text-align:center;
   }
+  .footer-wave{
+    position:absolute;
+    left:0;
+    right:0;
+    top:-92px;
+    height:94px;
+    overflow:hidden;
+    pointer-events:none;
+  }
+  .footer-wave svg{ display:block; width:100%; height:100%; }
   .closing-text{
     font-family:'Amiri',serif;
     font-size:20px;
     line-height:2.1;
-    color:var(--ink-soft);
+    color:#5c4c56;
     max-width:340px;
-    margin:0 auto 165px;
+    margin:0 auto 58px;
   }
 
   .mg-footer{
     background:transparent;
-    padding:0 0 8px;
+    padding:0 0 4px;
     text-align:center;
     border:0;
   }
-  .mg-footer::before{ display:none; }
-  .mg-logo{ width:700px; max-width:90%; height:auto; opacity:0.95; margin-bottom:10px; }
-  .mg-tag{ font-size:15px; color:#fdf9f3; margin-bottom:22px; }
-.ig-btn{
+  .mg-logo{
+    width:280px;
+    max-width:76%;
+    height:auto;
+    opacity:.96;
+    margin-bottom:14px;
+  }
+  .mg-tag{ font-size:15px; color:#5c4c56; margin-bottom:22px; }
+  .ig-btn{
     display:inline-flex;
     align-items:center;
     gap:10px;
     direction:ltr;
-
-    color:#fdf9f3;
-    background:transparent;
-
-    border:1px solid #e7d4d6;
-
+    color:#5c4c56;
+    background:rgba(255,255,255,.10);
+    border:1px solid rgba(92,76,86,.48);
     text-decoration:none;
-
-    padding:4px 12px;
-
+    padding:6px 16px;
     border-radius:30px;
-
     font-family:'Amiri',serif;
-    font-size:13px;
-
+    font-size:14px;
     cursor:pointer;
-
     transition:all .3s ease;
-}
-
-.ig-btn svg{
+  }
+  .ig-btn svg{
     width:20px;
     height:20px;
-    fill:#e7d4d6;
-
-    transition:fill .3s ease;
-}
-
-.ig-btn:hover{
-    background:#e7d4d6;
-    color:#5c4c56;
-}
-
-.ig-btn:hover svg{
     fill:#5c4c56;
-}
+    transition:fill .3s ease;
+  }
+  .ig-btn:hover{
+    background:#5c4c56;
+    color:#fffaf7;
+  }
+  .ig-btn:hover svg{ fill:#fffaf7; }
+  .footer-divider{
+    width:min(285px,82%);
+    margin:28px auto 16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+  }
+  .footer-divider::before,
+  .footer-divider::after{
+    content:"";
+    height:1px;
+    flex:1;
+    background:rgba(92,76,86,.34);
+  }
+  .footer-divider span{
+    color:#5c4c56;
+    font-size:14px;
+    line-height:1;
+  }
+  .footer-note{
+    margin:0 0 8px;
+    color:#5c4c56;
+    font-size:14px;
+  }
+  .footer-copy{
+    margin:0;
+    color:rgba(92,76,86,.82);
+    font-size:12px;
+    line-height:1.8;
+    direction:rtl;
+  }
 
   .music-toggle{ position:fixed; bottom:18px; left:18px; z-index:55; width:46px; height:46px; border-radius:50%; background:rgba(255,255,255,0.8); backdrop-filter:blur(6px); border:1px solid rgba(198,154,84,0.35); display:none; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,0.12); }
   .music-toggle svg{ width:20px; height:20px; fill:var(--apricot-deep); }
@@ -663,6 +684,13 @@
   </section>
 
   <section class="block closing">
+    <div class="footer-wave" aria-hidden="true">
+      <svg viewBox="0 0 480 94" preserveAspectRatio="none">
+        <path d="M0 31 C84 1 151 73 240 62 C329 51 394 2 480 31 L480 94 L0 94 Z" fill="#eadde0"/>
+        <path d="M0 44 C86 15 152 87 240 73 C328 59 395 15 480 44 L480 94 L0 94 Z" fill="#bea5aa"/>
+      </svg>
+    </div>
+
     <p class="closing-text fade-in">ننتظر حضوركم بكل شوق، لتكتمل فرحتنا وتبقى هذه الليلة ذكرى جميلة تجمعنا بكم.</p>
 
     <div class="mg-footer">
@@ -671,6 +699,10 @@
         <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7-1.4-.9-.4-.2-1-.4-2.2-.4-1.3-.1-1.7-.1-4.9-.1zm0 3.2A6.6 6.6 0 1 0 12 18.6 6.6 6.6 0 0 0 12 5.4zm0 10.9a4.3 4.3 0 1 1 0-8.6 4.3 4.3 0 0 1 0 8.6zm6.8-11.2a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/></svg>
         magical.galleryy
       </a>
+
+      <div class="footer-divider"><span>✦</span></div>
+      <p class="footer-note">صُممت بحب لتبقى الذكرى أجمل</p>
+      <p class="footer-copy">© 2026 Magical Gallery · جميع الحقوق محفوظة.</p>
     </div>
   </section>
 

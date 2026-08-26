@@ -216,74 +216,6 @@
   #invite > .block{ z-index:1; }
   .block{ padding:70px 26px; text-align:center; position:relative; }
 
-  /* ===== SUBTLE MOVING CLOUDS ===== */
-  .ambient-clouds{
-    position:absolute;
-    inset:0;
-    z-index:2;
-    overflow:hidden;
-    pointer-events:none;
-  }
-  .ambient-cloud{
-    position:absolute;
-    left:-42%;
-    width:170px;
-    height:48px;
-    border-radius:999px;
-    background:rgba(255,255,255,.78);
-    filter:blur(2.5px);
-    opacity:.34;
-    box-shadow:
-      18px -10px 16px rgba(255,255,255,.60),
-      48px -18px 20px rgba(255,255,255,.52),
-      78px -8px 18px rgba(248,240,243,.48),
-      34px 10px 22px rgba(231,212,214,.28);
-    will-change:transform;
-    animation:ambientCloudDrift 38s linear infinite;
-  }
-  .ambient-cloud::before,
-  .ambient-cloud::after{
-    content:"";
-    position:absolute;
-    border-radius:50%;
-    background:rgba(255,255,255,.66);
-  }
-  .ambient-cloud::before{
-    width:72px;
-    height:58px;
-    left:28px;
-    top:-22px;
-  }
-  .ambient-cloud::after{
-    width:88px;
-    height:64px;
-    right:24px;
-    top:-28px;
-  }
-  .cloud-1{ top:9%; animation-duration:36s; opacity:.34; }
-  .cloud-2{
-    top:48%;
-    width:132px;
-    height:40px;
-    opacity:.26;
-    animation-duration:44s;
-    animation-delay:-17s;
-  }
-  .cloud-2::before{ width:58px; height:46px; top:-18px; }
-  .cloud-2::after{ width:66px; height:50px; top:-22px; }
-  .cloud-3{
-    top:72%;
-    width:192px;
-    height:52px;
-    opacity:.29;
-    animation-duration:50s;
-    animation-delay:-31s;
-  }
-  @keyframes ambientCloudDrift{
-    from{ transform:translate3d(-18%,0,0); }
-    to{ transform:translate3d(395%,0,0); }
-  }
-
   .hero{
     width:100%; margin:0; padding:0; position:relative;
     background:var(--cream); overflow:hidden;
@@ -667,7 +599,6 @@
     .fade-in{ transition:none; opacity:1; transform:none; }
     .hero.play-names .name-piece{ animation:none; opacity:1; }
     .sky-edge-left,.sky-edge-right{ animation:none !important; }
-    .ambient-cloud{ animation:none !important; }
   }
 </style>
 </head>
@@ -707,12 +638,6 @@
 
 <!-- MAIN INVITE -->
 <div id="invite">
-
-  <div class="ambient-clouds" aria-hidden="true">
-    <span class="ambient-cloud cloud-1"></span>
-    <span class="ambient-cloud cloud-2"></span>
-    <span class="ambient-cloud cloud-3"></span>
-  </div>
 
   <section class="block hero" id="hero">
     <img class="arch-img" src="assets/sky4.png" alt="دعوة الزفاف">

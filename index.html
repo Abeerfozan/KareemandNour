@@ -234,41 +234,41 @@
     clip-path:inset(0 18% 0 18%);
   }
 
-  /* Prototype: animate the flower/foliage areas already painted on sky4.png.
-     The center stays static; only the two edge slices sway subtly inside the hero. */
-  .sky-edge-motion{
+  /* sky4 stays completely static; flowers animate separately on reveal. */
+  .flowers-bloom{
     position:absolute;
     inset:0;
     z-index:1;
-    pointer-events:none;
-    overflow:hidden;
-  }
-  .sky-edge-motion img{
-    position:absolute;
-    inset:0;
     width:100%;
     height:auto;
     max-width:none;
     display:block;
-    will-change:transform;
+    pointer-events:none;
+    opacity:0;
+    transform-origin:50% 72%;
+    transform:scale(.58,.48) translateY(22px);
+    filter:blur(2px);
+    will-change:transform,opacity,filter;
   }
-  .sky-edge-left{
-    clip-path:polygon(0 0,31% 0,27% 22%,25% 50%,22% 76%,18% 100%,0 100%);
-    transform-origin:3% 72%;
-    animation:skyFlowerSwayLeft 5.8s ease-in-out infinite;
+  @keyframes flowersOpen{
+    0%{
+      opacity:0;
+      transform:scale(.58,.48) translateY(22px);
+      filter:blur(2px);
+    }
+    62%{
+      opacity:1;
+      transform:scale(1.035,1.03) translateY(-2px);
+      filter:blur(0);
+    }
+    100%{
+      opacity:1;
+      transform:scale(1) translateY(0);
+      filter:blur(0);
+    }
   }
-  .sky-edge-right{
-    clip-path:polygon(69% 0,100% 0,100% 100%,82% 100%,78% 76%,75% 50%,73% 22%);
-    transform-origin:97% 72%;
-    animation:skyFlowerSwayRight 6.4s ease-in-out infinite;
-  }
-  @keyframes skyFlowerSwayLeft{
-    0%,100%{ transform:rotate(-.18deg) translate3d(-.2px,0,0) scale(1.001); }
-    50%{ transform:rotate(.38deg) translate3d(1.2px,-.8px,0) scale(1.003); }
-  }
-  @keyframes skyFlowerSwayRight{
-    0%,100%{ transform:rotate(.16deg) translate3d(.2px,0,0) scale(1.001); }
-    50%{ transform:rotate(-.36deg) translate3d(-1.2px,-.7px,0) scale(1.003); }
+  .hero.play-names .flowers-bloom{
+    animation:flowersOpen 1.65s cubic-bezier(.16,.86,.32,1) forwards;
   }
 
   /* Sequential Kareem → and → Nour lockup. */
@@ -598,7 +598,7 @@
     .petal{ display:none; }
     .fade-in{ transition:none; opacity:1; transform:none; }
     .hero.play-names .name-piece{ animation:none; opacity:1; }
-    .sky-edge-left,.sky-edge-right{ animation:none !important; }
+    .flowers-bloom{ animation:none !important; opacity:1; transform:none; filter:none; }
   }
 </style>
 </head>
@@ -641,10 +641,7 @@
 
   <section class="block hero" id="hero">
     <img class="arch-img" src="assets/sky4.png" alt="دعوة الزفاف">
-    <div class="sky-edge-motion" aria-hidden="true">
-      <img class="sky-edge-left" src="assets/sky4.png" alt="">
-      <img class="sky-edge-right" src="assets/sky4.png" alt="">
-    </div>
+    <img class="flowers-bloom" src="assets/flowers.png" alt="" aria-hidden="true">
     <div class="name-lockup" aria-label="كريم و نور">
       <div class="name-piece name-kareem"><img src="assets/kareem.png" alt="كريم"></div>
       <div class="name-piece name-and"><img src="assets/and.png" alt="و"></div>

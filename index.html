@@ -237,7 +237,7 @@
     box-shadow:0 22px 45px rgba(150,110,70,.22);
   }
 
-  /* sky4 stays completely static; flowers animate separately on reveal. */
+  /* sky4 stays completely static; flowers unfold organically on reveal. */
   .flowers-bloom{
     position:absolute;
     inset:0;
@@ -248,30 +248,52 @@
     display:block;
     pointer-events:none;
     opacity:0;
-    transform-origin:50% 72%;
-    transform:scale(.58,.48) translateY(22px);
-    filter:blur(2px);
-    will-change:transform,opacity,filter;
+    transform-origin:50% 78%;
+    clip-path:ellipse(7% 3% at 50% 76%);
+    transform:perspective(900px) rotateX(16deg) scale(.86,.42) translateY(30px);
+    filter:blur(1.8px) brightness(.96) saturate(.92);
+    will-change:transform,opacity,filter,clip-path;
   }
   @keyframes flowersOpen{
     0%{
       opacity:0;
-      transform:scale(.58,.48) translateY(22px);
-      filter:blur(2px);
+      clip-path:ellipse(7% 3% at 50% 76%);
+      transform:perspective(900px) rotateX(16deg) scale(.86,.42) translateY(30px);
+      filter:blur(1.8px) brightness(.96) saturate(.92);
     }
-    62%{
+    18%{
+      opacity:.55;
+      clip-path:ellipse(20% 11% at 50% 74%);
+      transform:perspective(900px) rotateX(11deg) scale(.90,.56) translateY(21px);
+      filter:blur(1.1px) brightness(.98) saturate(.96);
+    }
+    42%{
+      opacity:.88;
+      clip-path:ellipse(43% 31% at 50% 69%);
+      transform:perspective(900px) rotateX(6deg) scale(.95,.76) translateY(11px);
+      filter:blur(.5px) brightness(1) saturate(1);
+    }
+    70%{
       opacity:1;
-      transform:scale(1.035,1.03) translateY(-2px);
-      filter:blur(0);
+      clip-path:ellipse(72% 68% at 50% 59%);
+      transform:perspective(900px) rotateX(2deg) scale(1.015,.97) translateY(1px);
+      filter:blur(0) brightness(1.01) saturate(1.02);
+    }
+    86%{
+      opacity:1;
+      clip-path:ellipse(92% 96% at 50% 52%);
+      transform:perspective(900px) rotateX(0deg) scale(.995,1.015) translateY(-1px);
+      filter:blur(0) brightness(1) saturate(1);
     }
     100%{
       opacity:1;
-      transform:scale(1) translateY(0);
-      filter:blur(0);
+      clip-path:ellipse(110% 120% at 50% 50%);
+      transform:perspective(900px) rotateX(0deg) scale(1) translateY(0);
+      filter:blur(0) brightness(1) saturate(1);
     }
   }
   .hero.play-names .flowers-bloom{
-    animation:flowersOpen 1.65s cubic-bezier(.16,.86,.32,1) forwards;
+    animation:flowersOpen 2.9s cubic-bezier(.18,.72,.22,1) forwards;
   }
 
   /* Sequential Kareem → and → Nour lockup. */

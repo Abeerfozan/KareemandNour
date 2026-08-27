@@ -237,7 +237,7 @@
     box-shadow:0 22px 45px rgba(150,110,70,.22);
   }
 
-  /* Individual flower assets bloom one-by-one around the arch. */
+  /* Individual roses open together before the names appear. */
   .hero-flowers{
     position:absolute;
     inset:0;
@@ -254,44 +254,51 @@
     display:block;
     opacity:0;
     transform-origin:50% 50%;
-    transform:translate(-50%,-50%) rotate(calc(var(--rot) - 9deg)) scale(.06,.025);
-    filter:blur(1.4px) saturate(.92);
-    will-change:transform,opacity,filter;
+    clip-path:circle(7% at 50% 50%);
+    transform:translate(-50%,-50%) rotate(calc(var(--rot) - 7deg)) scale(.58);
+    filter:blur(.8px) saturate(.94);
+    will-change:transform,opacity,filter,clip-path;
   }
   @keyframes individualFlowerBloom{
     0%{
       opacity:0;
-      transform:translate(-50%,-50%) rotate(calc(var(--rot) - 9deg)) scale(.06,.025);
-      filter:blur(1.4px) saturate(.92);
+      clip-path:circle(7% at 50% 50%);
+      transform:translate(-50%,-50%) rotate(calc(var(--rot) - 7deg)) scale(.58);
+      filter:blur(.8px) saturate(.94);
     }
-    22%{
-      opacity:.62;
-      transform:translate(-50%,-50%) rotate(calc(var(--rot) - 5deg)) scale(.38,.18);
-      filter:blur(.8px) saturate(.96);
+    20%{
+      opacity:.72;
+      clip-path:circle(20% at 50% 50%);
+      transform:translate(-50%,-50%) rotate(calc(var(--rot) - 4deg)) scale(.68);
+      filter:blur(.45px) saturate(.97);
     }
-    48%{
+    44%{
       opacity:1;
-      transform:translate(-50%,-50%) rotate(calc(var(--rot) - 2deg)) scale(.78,.58);
-      filter:blur(.25px) saturate(1);
+      clip-path:circle(44% at 50% 50%);
+      transform:translate(-50%,-50%) rotate(calc(var(--rot) - 2deg)) scale(.84);
+      filter:blur(.15px) saturate(1);
     }
     68%{
       opacity:1;
-      transform:translate(-50%,-50%) rotate(var(--rot)) scale(1.09,1.04);
-      filter:blur(0) saturate(1.03);
+      clip-path:circle(72% at 50% 50%);
+      transform:translate(-50%,-50%) rotate(var(--rot)) scale(1.07);
+      filter:blur(0) saturate(1.02);
     }
     84%{
       opacity:1;
-      transform:translate(-50%,-50%) rotate(var(--rot)) scale(.97,.99);
+      clip-path:circle(95% at 50% 50%);
+      transform:translate(-50%,-50%) rotate(var(--rot)) scale(.98);
       filter:blur(0) saturate(1);
     }
     100%{
       opacity:1;
+      clip-path:circle(140% at 50% 50%);
       transform:translate(-50%,-50%) rotate(var(--rot)) scale(1);
       filter:blur(0) saturate(1);
     }
   }
-  .hero.play-names .bloom-flower{
-    animation:individualFlowerBloom 1.18s cubic-bezier(.16,.78,.25,1) var(--delay) forwards;
+  .hero.play-flowers .bloom-flower{
+    animation:individualFlowerBloom 1.65s cubic-bezier(.18,.78,.24,1) both;
   }
 
   /* Sequential Kareem → and → Nour lockup. */
@@ -621,7 +628,7 @@
     .petal{ display:none; }
     .fade-in{ transition:none; opacity:1; transform:none; }
     .hero.play-names .name-piece{ animation:none; opacity:1; }
-    .bloom-flower{ animation:none !important; opacity:1; filter:none; transform:translate(-50%,-50%) rotate(var(--rot)) scale(1); }
+    .bloom-flower{ animation:none !important; opacity:1; clip-path:none; filter:none; transform:translate(-50%,-50%) rotate(var(--rot)) scale(1); }
   }
 </style>
 </head>
@@ -665,34 +672,34 @@
   <section class="block hero" id="hero">
     <img class="arch-img" src="assets/sky4.png" alt="دعوة الزفاف">
     <div class="hero-flowers" aria-hidden="true">
-      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:5%;--top:4%;--size:14%;--rot:-14deg;--delay:.00s">
-      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:18%;--top:7%;--size:9%;--rot:10deg;--delay:.14s">
-      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:7%;--top:13%;--size:12%;--rot:-8deg;--delay:.28s">
-      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:19%;--top:17%;--size:7%;--rot:15deg;--delay:.42s">
-      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:4%;--top:24%;--size:11%;--rot:-18deg;--delay:.56s">
-      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:15%;--top:29%;--size:8%;--rot:7deg;--delay:.70s">
-      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:6%;--top:37%;--size:9%;--rot:-5deg;--delay:.84s">
-      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:17%;--top:42%;--size:7%;--rot:18deg;--delay:.98s">
-      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:5%;--top:49%;--size:13%;--rot:-12deg;--delay:1.12s">
-      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:16%;--top:56%;--size:9%;--rot:9deg;--delay:1.26s">
-      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:5%;--top:64%;--size:12%;--rot:-16deg;--delay:1.40s">
-      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:18%;--top:69%;--size:8%;--rot:13deg;--delay:1.54s">
-      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:7%;--top:77%;--size:11%;--rot:-7deg;--delay:1.68s">
-      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:18%;--top:84%;--size:9%;--rot:17deg;--delay:1.82s">
-      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:6%;--top:93%;--size:14%;--rot:-13deg;--delay:1.96s">
+      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:5%;--top:4%;--size:9.5%;--rot:-14deg">
+      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:16%;--top:7%;--size:6.2%;--rot:10deg">
+      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:7%;--top:13%;--size:8.2%;--rot:-8deg">
+      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:18%;--top:17%;--size:5.2%;--rot:15deg">
+      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:4%;--top:24%;--size:7.4%;--rot:-18deg">
+      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:14%;--top:29%;--size:5.8%;--rot:7deg">
+      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:6%;--top:37%;--size:6.4%;--rot:-5deg">
+      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:16%;--top:42%;--size:4.8%;--rot:18deg">
+      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:5%;--top:49%;--size:8.8%;--rot:-12deg">
+      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:15%;--top:56%;--size:6.1%;--rot:9deg">
+      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:5%;--top:64%;--size:8.1%;--rot:-16deg">
+      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:17%;--top:69%;--size:5.4%;--rot:13deg">
+      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:7%;--top:77%;--size:7.2%;--rot:-7deg">
+      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:17%;--top:84%;--size:6%;--rot:17deg">
+      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:6%;--top:93%;--size:9.8%;--rot:-13deg">
 
-      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:31%;--top:3%;--size:9%;--rot:-10deg;--delay:.20s">
-      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:45%;--top:2%;--size:7%;--rot:8deg;--delay:.52s">
-      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:62%;--top:3%;--size:8%;--rot:-4deg;--delay:.80s">
-      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:78%;--top:4%;--size:7%;--rot:12deg;--delay:1.08s">
+      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:31%;--top:3%;--size:5.8%;--rot:-10deg">
+      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:45%;--top:2%;--size:4.6%;--rot:8deg">
+      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:62%;--top:3%;--size:5.1%;--rot:-4deg">
+      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:78%;--top:4%;--size:4.8%;--rot:12deg">
 
-      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:95%;--top:7%;--size:10%;--rot:14deg;--delay:.34s">
-      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:88%;--top:15%;--size:7%;--rot:-9deg;--delay:.66s">
-      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:96%;--top:25%;--size:9%;--rot:16deg;--delay:1.00s">
-      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:91%;--top:46%;--size:6%;--rot:-13deg;--delay:1.34s">
-      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:96%;--top:63%;--size:10%;--rot:11deg;--delay:1.62s">
-      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:89%;--top:77%;--size:7%;--rot:-7deg;--delay:1.88s">
-      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:95%;--top:91%;--size:11%;--rot:15deg;--delay:2.10s">
+      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:95%;--top:7%;--size:6.8%;--rot:14deg">
+      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:88%;--top:15%;--size:4.8%;--rot:-9deg">
+      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:96%;--top:25%;--size:6.2%;--rot:16deg">
+      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:91%;--top:46%;--size:4.3%;--rot:-13deg">
+      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:96%;--top:63%;--size:6.9%;--rot:11deg">
+      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:89%;--top:77%;--size:4.9%;--rot:-7deg">
+      <img class="bloom-flower" src="assets/flower.png" alt="" style="--left:95%;--top:91%;--size:7.5%;--rot:15deg">
     </div>
     <div class="name-lockup" aria-label="كريم و نور">
       <div class="name-piece name-kareem"><img src="assets/kareem.png" alt="كريم"></div>
@@ -880,11 +887,12 @@ function openEnvelope(){
             behavior:"auto"
         });
 
+        const hero = document.getElementById("hero");
+        hero.classList.add("play-flowers");
+
         setTimeout(()=>{
-            document
-                .getElementById("hero")
-                .classList.add("play-names");
-        },0);
+            hero.classList.add("play-names");
+        },1750);
 
     },1700);
 
